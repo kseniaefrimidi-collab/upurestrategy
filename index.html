@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upure — Brand Positioning Strategizer</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Georgia','Garamond',serif;color:#3A3A3A;background:#F5F1E8;min-height:100vh}
+    header{background:#2C3E50;padding:24px 40px;display:flex;align-items:center;justify-content:space-between}
+    .logo{color:#F5F1E8;font-size:20px;letter-spacing:4px;font-weight:700}
+    .tagline{color:#8b7d6b;font-size:10px;letter-spacing:2px;margin-top:4px;font-family:sans-serif}
+    .status-bar{background:#fff;border-bottom:0.5px solid rgba(44,62,80,0.1);padding:10px 40px;display:flex;justify-content:space-between;align-items:center;font-family:sans-serif;font-size:13px;color:#8b7d6b}
+    main{max-width:880px;margin:0 auto;padding:48px 32px}
+    .card{background:#fff;border-radius:6px;padding:36px;margin-bottom:20px;box-shadow:0 2px 20px rgba(44,62,80,0.06);border-left:4px solid #6B3E5C}
+    .card.no-border{border-left:none}
+    .slabel{font-size:10px;letter-spacing:3px;color:#6B3E5C;text-transform:uppercase;margin:1.5rem 0 1rem 0;font-weight:700;border-bottom:0.5px solid rgba(139,125,107,0.2);padding-bottom:8px}
+    .label{font-size:11px;letter-spacing:1px;color:#8b7d6b;text-transform:uppercase;margin-bottom:10px;font-weight:500;display:block}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+    .g1{margin-bottom:1rem}
+    input,textarea,select{background:#F5F1E8;border:1px solid rgba(44,62,80,0.12);border-radius:3px;padding:10px 14px;font-size:15px;color:#2C3E50;font-family:inherit;width:100%;outline:none}
+    input:focus,textarea:focus,select:focus{border-color:#6B3E5C}
+    textarea{resize:vertical;min-height:80px}
+    .btn{border:none;border-radius:3px;padding:13px 32px;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:sans-serif;font-weight:700;transition:all 0.2s}
+    .btn-primary{background:#6B3E5C;color:#fff;width:100%}
+    .btn-primary:hover{background:#2C3E50}
+    .btn-secondary{background:transparent;border:1.5px solid #6B3E5C;color:#6B3E5C;width:auto}
+    .btn-secondary:hover{background:#6B3E5C;color:#fff}
+    .step-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:0.5px solid rgba(139,125,107,0.15)}
+    .step-row:last-child{border-bottom:none}
+    .step-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;font-family:sans-serif;font-weight:600}
+    .sp{border:1px solid rgba(139,125,107,0.3);color:#8b7d6b}
+    .sa{border:2px solid #6B3E5C;color:#6B3E5C;animation:pulse 1.5s infinite}
+    .sd{background:#6B3E5C;color:#fff}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(107,62,92,0.3);border-top:2px solid #6B3E5C;border-radius:50%;animation:spin 1s linear infinite;margin-right:8px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .progress-bar{width:100%;height:6px;background:#e0d8cc;border-radius:3px;margin:16px 0;overflow:hidden}
+    .progress-fill{height:100%;background:#6B3E5C;border-radius:3px;transition:width 0.3s}
+    .rs{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:0.5px solid rgba(139,125,107,0.2)}
+    .rt{font-size:10px;letter-spacing:3px;color:#6B3E5C;text-transform:uppercase;margin-bottom:14px;font-weight:700}
+    .rtxt{font-size:15px;line-height:1.9;color:#3A3A3A;white-space:pre-wrap}
+    .hl{background:#F5F1E8;border-left:4px solid #6B3E5C;padding:18px 22px;margin:12px 0;font-style:italic;line-height:1.8;font-size:16px;color:#2C3E50;border-radius:0 4px 4px 0}
+    .seg-card{background:#F5F1E8;border-radius:4px;padding:20px;margin-bottom:12px;border:0.5px solid rgba(44,62,80,0.08)}
+    .seg-name{font-size:16px;font-weight:500;color:#2C3E50;margin-bottom:6px}
+    .seg-desc{font-size:13px;color:#8b7d6b;margin-bottom:14px;line-height:1.6;font-family:sans-serif}
+    .seg-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+    .seg-pill{font-size:10px;letter-spacing:1px;text-transform:uppercase;font-family:sans-serif;font-weight:700;background:#fff;border:0.5px solid rgba(139,125,107,0.3);border-radius:3px;padding:3px 10px;white-space:nowrap;color:#8b7d6b;flex-shrink:0;margin-top:2px}
+    .seg-text{font-size:14px;line-height:1.6;color:#3A3A3A}
+    .comp-card{background:#F5F1E8;border-radius:4px;padding:16px;margin-bottom:10px;border:0.5px solid rgba(44,62,80,0.08)}
+    .comp-name{font-size:15px;font-weight:500;margin-bottom:4px;color:#2C3E50}
+    .comp-tag{font-size:11px;color:#8b7d6b;margin-bottom:10px;font-family:sans-serif;letter-spacing:0.5px}
+    .comp-text{font-size:14px;line-height:1.7;color:#3A3A3A;margin-bottom:8px}
+    .disclaimer{background:#F5F1E8;border:0.5px solid rgba(139,125,107,0.3);border-radius:4px;padding:16px 20px;margin-top:28px;font-size:13px;color:#8b7d6b;line-height:1.7;font-family:sans-serif;font-style:italic}
+    .pricing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:24px 0}
+    .pricing-card{background:#F5F1E8;border:1px solid rgba(44,62,80,0.12);border-radius:6px;padding:24px 20px;text-align:center}
+    .pricing-card.featured{border:2px solid #6B3E5C}
+    .ptag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6B3E5C;margin-bottom:10px;font-family:sans-serif;font-weight:700}
+    .pprice{font-size:32px;font-weight:700;color:#2C3E50;margin-bottom:4px}
+    .pdesc{font-size:13px;color:#8b7d6b;margin-bottom:16px;line-height:1.5;font-family:sans-serif}
+    .plink{display:block;background:#6B3E5C;color:#fff;border-radius:3px;padding:10px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:sans-serif;font-weight:700;text-decoration:none;transition:background 0.2s;margin-bottom:12px}
+    .plink:hover{background:#2C3E50}
+    .hidden{display:none}
+    footer{text-align:center;padding:24px;border-top:0.5px solid rgba(139,125,107,0.2);color:#8b7d6b;font-size:11px;letter-spacing:1px;font-family:sans-serif}
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">UPURE</div>
+    <div class="tagline">YOUR JURISDICTION TO RISE</div>
+  </div>
+</header>
+
+<div class="status-bar">
+  <span id="statusText">2 free analyses remaining</span>
+  <span style="font-size:12px">Real research in ~60 seconds</span>
+</div>
+
+<main>
+
+  <!-- FORM -->
+  <div id="form" class="card">
+    <h1 style="font-size:28px;margin-bottom:10px;font-weight:500;color:#2C3E50">Find where your brand wins.</h1>
+    <p style="color:#8b7d6b;margin-bottom:28px;font-size:15px;line-height:1.6">Tell us about your brand. We research your market, analyze competition, then build your complete positioning strategy.</p>
+
+    <div class="slabel">Your Brand</div>
+    <div class="g2">
+      <div><label class="label">Brand Name *</label><input id="brand" placeholder="e.g. Papapresso"></div>
+      <div><label class="label">Market / Industry *</label><input id="market" placeholder="e.g. Specialty coffee, Sydney"></div>
+    </div>
+    <div class="g2">
+      <div><label class="label">Location *</label><input id="location" placeholder="e.g. Sydney, Australia"></div>
+      <div><label class="label">What you do / offer</label><input id="whatYouDo" placeholder="Your product or service"></div>
+    </div>
+
+    <div class="slabel">Deep Understanding</div>
+    <div class="g1"><label class="label">Your real "why" — why does this brand exist?</label><textarea id="realWhy" placeholder="What's the deeper belief or purpose behind your brand?"></textarea></div>
+    <div class="g1"><label class="label">Who is your real customer? (describe the person, not demographics)</label><textarea id="customerDesc" placeholder="What are they like? What do they care about?"></textarea></div>
+
+    <div class="slabel">Market & Competition</div>
+    <div class="g1"><label class="label">Main competitors * (comma separated)</label><input id="competitors" placeholder="e.g. Market Lane, Seven Seeds, Proud Mary"></div>
+
+    <div class="slabel">Customer Voice</div>
+    <div class="g1"><label class="label">What would customers say about you if you weren't in the room? *</label><textarea id="customerVoice" placeholder="How do customers actually describe you? What do they value?"></textarea></div>
+    <div class="g1"><label class="label">Which customer type gets the most value from you? *</label><input id="topCustomer" placeholder="e.g. Ritual-driven professionals who want to understand what they're drinking"></div>
+
+    <div class="g2" style="margin-top:8px">
+      <div><label class="label">Expand to new markets?</label>
+      <select id="wantExpand">
+        <option value="A">A) Yes — expand to new regions/markets</option>
+        <option value="B">B) No — deepen positioning in current market</option>
+        <option value="C">C) Maybe — still exploring, need clarity first</option>
+        <option value="D">D) Yes — but different positioning for new market</option>
+      </select></div>
+    </div>
+
+    <div id="formErr" style="background:#fff5f5;border:1px solid #e0a0a0;border-radius:3px;padding:10px 14px;color:#c0392b;font-size:13px;font-family:sans-serif;margin-top:10px;display:none"></div>
+    <div style="margin-top:24px"><button class="btn btn-primary" onclick="startAnalysis()">Analyze My Brand →</button></div>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loading" class="card no-border hidden">
+    <h2 style="font-size:20px;font-weight:500;margin-bottom:6px;color:#2C3E50">Building your strategy</h2>
+    <p style="font-size:14px;color:#8b7d6b;margin-bottom:20px;font-family:sans-serif">Real analysis in progress. This takes 30–90 seconds.</p>
+    
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span class="spinner"></span>
+      <span id="progressText" style="font-size:14px;color:#6B3E5C;font-weight:500;font-family:sans-serif">0% complete</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressBar" style="width:0%"></div></div>
+
+    <div class="step-row"><div class="step-icon sp" id="s1i">1</div><div><div style="font-size:15px;font-weight:500;color:#2C3E50">Researching your market</div><div style="font-size:13px;color:#8b7d6b;font-family:sans-serif" id="s1s">Scanning segments, pain points, motivations</div></div></div>
+    <div class="step-row"><div class="step-icon sp" id="s2i">2</div><div><div style="font-size:15px;font-weight:500;color:#2C3E50">Analyzing competitors</div><div style="font-size:13px;color:#8b7d6b;font-family:sans-serif" id="s2s">Finding your real competitive threats</div></div></div>
+    <div class="step-row"><div class="step-icon sp" id="s3i">3</div><div><div style="font-size:15px;font-weight:500;color:#2C3E50">Building your positioning strategy</div><div style="font-size:13px;color:#8b7d6b;font-family:sans-serif" id="s3s">Grounded in real market data</div></div></div>
+  </div>
+
+  <!-- EMAIL GATE -->
+  <div id="emailgate" class="card no-border hidden" style="text-align:center;padding:56px 40px">
+    <div style="font-size:36px;margin-bottom:20px">✓</div>
+    <h2 style="font-size:24px;font-weight:500;margin-bottom:12px;color:#2C3E50">Your strategy is ready.</h2>
+    <p style="font-size:15px;color:#8b7d6b;margin-bottom:28px;line-height:1.7;max-width:420px;margin-left:auto;margin-right:auto">Enter your email to see it. We'll also send you a copy so you can revisit it anytime.</p>
+    <div style="max-width:360px;margin:0 auto">
+      <input type="email" id="userEmail" placeholder="your@email.com" style="margin-bottom:12px;text-align:center">
+      <button class="btn btn-primary" onclick="submitEmail()" id="emailBtn">See My Strategy →</button>
+      <div id="emailErr" style="background:#fff5f5;border:1px solid #e0a0a0;border-radius:3px;padding:10px 14px;color:#c0392b;font-size:13px;font-family:sans-serif;margin-top:10px;display:none"></div>
+      <p style="font-size:12px;color:#8b7d6b;margin-top:14px;font-family:sans-serif">No spam. Just your strategy.</p>
+    </div>
+  </div>
+
+  <!-- PRICING WALL -->
+  <div id="pricing" class="card no-border hidden">
+    <div style="text-align:center;margin-bottom:32px">
+      <h2 style="font-size:26px;font-weight:500;margin-bottom:12px;color:#2C3E50">You've used your 2 free analyses.</h2>
+      <p style="font-size:15px;color:#8b7d6b;max-width:480px;margin:0 auto;line-height:1.7;font-family:sans-serif">Buy credits to keep going. Each analysis costs 10 credits. Credits expire in 30 days.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="ptag">Starter</div>
+        <div class="pprice">$9</div>
+        <div class="pdesc">30 credits<br>3 analyses</div>
+        <a class="plink" href="https://efrimidi.gumroad.com/l/upure-3" target="_blank">Buy Now →</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="ptag">Most Popular</div>
+        <div class="pprice">$19</div>
+        <div class="pdesc">120 credits<br>12 analyses</div>
+        <a class="plink" href="https://efrimidi.gumroad.com/l/upure-12" target="_blank">Buy Now →</a>
+      </div>
+      <div class="pricing-card">
+        <div class="ptag">Pro</div>
+        <div class="pprice">$49</div>
+        <div class="pdesc">Unlimited<br>30 days</div>
+        <a class="plink" href="https://efrimidi.gumroad.com/l/upure-unlimited" target="_blank">Buy Now →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results" class="hidden">
+    <div class="card no-border">
+      <div style="margin-bottom:28px;border-bottom:0.5px solid rgba(139,125,107,0.2);padding-bottom:20px">
+        <h2 style="font-size:24px;font-weight:500;margin-bottom:4px;color:#2C3E50" id="rBrand">Brand</h2>
+        <p style="font-size:13px;color:#8b7d6b;font-family:sans-serif" id="rSub">Market · Location</p>
+      </div>
+
+      <div class="rs"><div class="rt">The Real Market Picture</div><div class="rtxt" id="r_market"></div></div>
+      <div class="rs"><div class="rt">Who's Actually in Your Market</div><div id="r_segments"></div></div>
+      <div class="rs"><div class="rt">Your Real Competitive Threats</div><div id="r_competitors"></div></div>
+      
+      <div class="rs">
+        <div class="rt">Market Positioning Map</div>
+        <svg id="matrixSvg" viewBox="0 0 640 520" style="width:100%;border-radius:4px;border:0.5px solid rgba(44,62,80,0.1);background:#fff">
+          <line x1="90" y1="260" x2="550" y2="260" stroke="#e0d8cc" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="320" y1="70" x2="320" y2="450" stroke="#e0d8cc" stroke-width="1" stroke-dasharray="4 3"/>
+          <rect x="320" y="70" width="230" height="190" fill="#6B3E5C" opacity="0.05" rx="4"/>
+          <text x="435" y="95" text-anchor="middle" font-size="9" fill="#6B3E5C" opacity="0.8" font-family="sans-serif" font-weight="700" letter-spacing="2">YOUR SPACE</text>
+          <text id="xLeft" x="100" y="278" font-size="11" fill="#8b7d6b" font-family="sans-serif">◄ Left</text>
+          <text id="xRight" x="500" y="278" font-size="11" fill="#8b7d6b" font-family="sans-serif" text-anchor="end">Right ►</text>
+          <text id="xAxis" x="320" y="480" font-size="11" fill="#2C3E50" font-family="sans-serif" text-anchor="middle" font-weight="500">AXIS</text>
+          <text id="yTop" x="32" y="140" font-size="10" fill="#8b7d6b" font-family="sans-serif" transform="rotate(-90,32,140)">▲ Top</text>
+          <text id="yBottom" x="32" y="395" font-size="10" fill="#8b7d6b" font-family="sans-serif" transform="rotate(-90,32,395)">Bottom ▼</text>
+          <text id="yAxis" x="55" y="260" font-size="11" fill="#2C3E50" font-family="sans-serif" font-weight="500" letter-spacing="1" text-anchor="middle" transform="rotate(-90,55,260)">AXIS</text>
+          <circle cx="190" cy="210" r="9" fill="#2C3E50" opacity="0.8"/><text x="203" y="206" font-size="11" fill="#8b7d6b" font-family="sans-serif" id="mc1">C1</text>
+          <circle cx="215" cy="243" r="9" fill="#3d7a6b" opacity="0.8"/><text x="228" y="239" font-size="11" fill="#8b7d6b" font-family="sans-serif" id="mc2">C2</text>
+          <circle cx="258" cy="338" r="9" fill="#b07a30" opacity="0.8"/><text x="271" y="334" font-size="11" fill="#8b7d6b" font-family="sans-serif" id="mc3">C3</text>
+          <circle cx="450" cy="120" r="22" fill="#6B3E5C" opacity="0.1"/>
+          <circle cx="450" cy="120" r="13" fill="#6B3E5C"/>
+          <text x="468" y="112" font-size="13" fill="#6B3E5C" font-family="sans-serif" font-weight="700" id="matrixBrand">You</text>
+        </svg>
+      </div>
+
+      <div class="rs"><div class="rt">The Gap Nobody Is Filling</div><div class="rtxt" id="r_whitespace"></div></div>
+
+      <div class="rs">
+        <div class="rt">Your Positioning — Here's What It Should Be</div>
+        <div id="r_positioning"></div>
+      </div>
+
+      <div class="rs" style="border:none">
+        <div class="rt">What To Do Next</div>
+        <div class="rtxt" id="r_advisory"></div>
+      </div>
+
+      <div class="disclaimer">
+        ⚠️ This strategy is a starting point, not a final verdict. It's a tool to pressure-test your direction, spot blind spots, and ask better questions — not a substitute for professional brand strategy work. Use it to challenge your assumptions and explore possibilities. For a full, tailored strategy, <a href="mailto:ksenia@upure.space" style="color:#6B3E5C">work with us directly</a>.
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn btn-secondary" onclick="location.reload()">← Analyze Another Brand</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>Upure · ksenia@upure.space · Brand Strategy That Works</footer>
+
+<script>
+const W3F_KEY = "655396be-87e0-42dd-b44e-c0c0f69f7c20";
+const FREE_LIMIT = 2;
+let brandData = {};
+
+function getUses(){ return parseInt(localStorage.getItem("upure_uses")||"0"); }
+function setUses(n){ localStorage.setItem("upure_uses", String(n)); }
+function updateStatus(){
+  const uses = getUses();
+  const freeLeft = Math.max(0, FREE_LIMIT - uses);
+  document.getElementById("statusText").textContent = freeLeft > 0 ? freeLeft + " free " + (freeLeft===1?"analysis":"analyses") + " remaining" : "Free analyses used — buy credits to continue";
+}
+
+async function startAnalysis(){
+  const brand = document.getElementById("brand").value.trim();
+  const market = document.getElementById("market").value.trim();
+  const location = document.getElementById("location").value.trim();
+  const customerVoice = document.getElementById("customerVoice").value.trim();
+  const topCustomer = document.getElementById("topCustomer").value.trim();
+  const competitors = document.getElementById("competitors").value.trim();
+  const errEl = document.getElementById("formErr");
+
+  if(!brand||!market||!location||!customerVoice||!topCustomer||!competitors){
+    errEl.textContent = "Please fill in all required fields marked with *";
+    errEl.style.display = "block";
+    return;
+  }
+  errEl.style.display = "none";
+
+  const uses = getUses();
+  if(uses >= FREE_LIMIT){
+    document.getElementById("form").classList.add("hidden");
+    document.getElementById("pricing").classList.remove("hidden");
+    return;
+  }
+
+  brandData = {
+    brand, market, location, competitors,
+    whatYouDo: document.getElementById("whatYouDo").value.trim(),
+    realWhy: document.getElementById("realWhy").value.trim(),
+    customerDesc: document.getElementById("customerDesc").value.trim(),
+    customerVoice,
+    topCustomer,
+    wantExpand: document.getElementById("wantExpand").value
+  };
+
+  document.getElementById("form").classList.add("hidden");
+  document.getElementById("loading").classList.remove("hidden");
+
+  let progress = 0;
+  const steps = [
+    {i:"s1i",s:"s1s",t:"Scanning market segments and customer pain points",p:33,d:0},
+    {i:"s2i",s:"s2s",t:"Identifying competitive threats and market gaps",p:66,d:2500},
+    {i:"s3i",s:"s3s",t:"Synthesizing your complete positioning strategy",p:100,d:5000}
+  ];
+
+  steps.forEach((step,idx)=>{
+    setTimeout(()=>{
+      if(idx>0){
+        document.getElementById(steps[idx-1].i).className="step-icon sd";
+        document.getElementById(steps[idx-1].i).textContent="✓";
+      }
+      document.getElementById(step.i).className="step-icon sa";
+      document.getElementById(step.s).textContent=step.t;
+      progress = step.p;
+      updateProgress(progress);
+    },step.d);
+  });
+
+  try {
+    const response = await fetch("/api/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(brandData)
+    });
+
+    if (!response.ok) throw new Error("Analysis failed");
+    const result = await response.json();
+
+    setTimeout(()=>{
+      document.getElementById("s3i").className="step-icon sd";
+      document.getElementById("s3i").textContent="✓";
+      updateProgress(100);
+    }, 5000);
+
+    setTimeout(()=>{
+      document.getElementById("loading").classList.add("hidden");
+      displayResults(result);
+      document.getElementById("emailgate").classList.remove("hidden");
+    }, 5500);
+
+  } catch (error) {
+    console.error("Error:", error);
+    document.getElementById("loading").classList.add("hidden");
+    errEl.textContent = "Analysis failed. Please try again.";
+    errEl.style.display = "block";
+    document.getElementById("form").classList.remove("hidden");
+  }
+}
+
+function updateProgress(value){
+  document.getElementById("progressText").textContent = value + "% complete";
+  document.getElementById("progressBar").style.width = value + "%";
+}
+
+function displayResults(data) {
+  window.analysisData = data;
+  
+  document.getElementById("rBrand").textContent = data.brand.name;
+  document.getElementById("rSub").textContent = data.brand.market + " · " + data.brand.location;
+
+  const market = data.market || {};
+  document.getElementById("r_market").textContent = market.market_context || "Market analysis...";
+
+  const segments = (market.segments || []).map(s => `<div class="seg-card">
+    <div class="seg-name">${s.name}</div>
+    <div class="seg-desc">${s.description}</div>
+    <div class="seg-row"><span class="seg-pill">They want</span><span class="seg-text">${s.jtbd}</span></div>
+    <div class="seg-row"><span class="seg-pill">Pain points</span><span class="seg-text">${s.pain_points.join(", ")}</span></div>
+    <div class="seg-row"><span class="seg-pill">Motivations</span><span class="seg-text">${s.desires.join(", ")}</span></div>
+  </div>`).join("");
+  document.getElementById("r_segments").innerHTML = segments;
+
+  const competitors = (data.competitors.competitors || []).map(c => `<div class="comp-card">
+    <div class="comp-name">${c.name}</div>
+    <div class="comp-tag">${c.threat_level} THREAT</div>
+    <div class="comp-text"><strong>Strengths:</strong> ${c.strengths}</div>
+    <div class="comp-text"><strong>Weakness:</strong> ${c.weakness}</div>
+    <div class="comp-text">${c.analysis}</div>
+  </div>`).join("");
+  document.getElementById("r_competitors").innerHTML = competitors;
+
+  const pos = data.positioning || {};
+  
+  // Dynamic axes
+  const xAxis = pos.x_axis || {name: "Market Dimension", left: "Option A", right: "Option B"};
+  const yAxis = pos.y_axis || {name: "Market Dimension", left: "Option C", right: "Option D"};
+  document.getElementById("xLeft").textContent = "◄ " + xAxis.left;
+  document.getElementById("xRight").textContent = xAxis.right + " ►";
+  document.getElementById("xAxis").textContent = xAxis.name.toUpperCase();
+  document.getElementById("yTop").textContent = "▲ " + yAxis.left;
+  document.getElementById("yBottom").textContent = yAxis.right + " ▼";
+  document.getElementById("yAxis").textContent = yAxis.name.toUpperCase();
+
+  const compArr = brandData.competitors.split(",").map(c=>c.trim()).filter(Boolean);
+  document.getElementById("mc1").textContent = compArr[0] || "C1";
+  document.getElementById("mc2").textContent = compArr[1] || "C2";
+  document.getElementById("mc3").textContent = compArr[2] || "C3";
+  document.getElementById("matrixBrand").textContent = data.brand.name;
+
+  document.getElementById("r_whitespace").textContent = pos.white_space || "Market gap analysis...";
+
+  const posHTML = `<div class="hl">${pos.positioning_statement || "Your positioning statement"}</div>
+    <div class="rtxt" style="margin-top:18px">
+    <strong style="font-weight:500">Why this works:</strong><br>
+${pos.why_works}
+
+<strong style="font-weight:500">Differentiation:</strong><br>
+${pos.differentiation}
+
+<strong style="font-weight:500">How to communicate:</strong><br>
+${pos.how_to_communicate}
+    </div>`;
+  document.getElementById("r_positioning").innerHTML = posHTML;
+
+  const advHTML = `<strong style="font-weight:500">Key strengths to lean into:</strong><br>
+${pos.key_strengths}
+
+<strong style="font-weight:500">Risks & doubts to address:</strong><br>
+${pos.risks}
+
+<strong style="font-weight:500">Emerging opportunities:</strong><br>
+${pos.opportunities}
+
+<strong style="font-weight:500">Tactical recommendations:</strong><br>
+${pos.tactical_recommendations}
+
+<strong style="font-weight:500">Expansion strategy:</strong><br>
+${pos.expansion_strategy}`;
+  document.getElementById("r_advisory").innerHTML = advHTML;
+}
+
+async function submitEmail(){
+  const email = document.getElementById("userEmail").value.trim();
+  const errEl = document.getElementById("emailErr");
+  const btn = document.getElementById("emailBtn");
+
+  if(!email||!email.includes("@")){
+    errEl.textContent = "Please enter a valid email.";
+    errEl.style.display = "block";
+    return;
+  }
+  errEl.style.display = "none";
+  btn.textContent = "Sending...";
+  btn.disabled = true;
+
+  try {
+    await fetch("https://api.web3forms.com/submit",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        access_key: W3F_KEY,
+        subject: `New Upure Lead — ${brandData.brand}`,
+        from_name: "Upure Strategizer",
+        email: email,
+        message: `New analysis:\n\nEmail: ${email}\nBrand: ${brandData.brand}\nMarket: ${brandData.market}\nLocation: ${brandData.location}`
+      })
+    });
+  } catch(e){}
+
+  const uses = getUses();
+  setUses(uses + 1);
+  updateStatus();
+
+  document.getElementById("emailgate").classList.add("hidden");
+  document.getElementById("results").classList.remove("hidden");
+}
+
+updateStatus();
+</script>
+
+</body>
+</html>
